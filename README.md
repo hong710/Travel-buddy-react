@@ -7,12 +7,12 @@
  ## User Stories
 
  As a user: 
- - I able to search destination.
- - I able to create an account and able to log in to track my suggestions results (hotels, restaurants, attractions)
- - I able to add the suggestion results into travel plan.
- - I able to add note to each suggestion result in travel plan. 
- - I able to delete the suggestion result from travel plan.
- - I able to interact with the google map to locate the destination.
+ - I'm able to search destination.
+ - I'm able to create an account and able to log in to track my suggestions results (hotels, restaurants, attractions)
+ - I'm able to add the suggestion results into travel plan.
+ - I'm able to add note to each suggestion result in travel plan. 
+ - I'm able to delete the suggestion result from travel plan.
+ - I'm able to interact with the google map to locate the destination.
 
 ## Database Relationships
 
