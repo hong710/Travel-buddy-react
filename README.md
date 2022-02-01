@@ -14,7 +14,7 @@
  - I able to delete the suggestion result from travel plan.
  - I able to interact with the google map to locate the destination.
 
-## Database Relationship
+## Database Relationships
 
 
 ![db](https://user-images.githubusercontent.com/8335102/151934618-6c40cf16-bc37-49df-8a76-1e592b73ef0f.PNG)
