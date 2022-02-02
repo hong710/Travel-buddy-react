@@ -1,0 +1,24 @@
+[
+    {
+        "service": "Destinations",
+        "description": "iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti"
+    },
+
+    {
+        "service": "Hotels",
+        "description": "iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti"
+        
+    },
+
+    {
+        "service": "Restaurants",
+        "description": "iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti"
+        
+    },
+
+    {
+        "service": "Attractions",
+        "description": "iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti"
+    
+    }
+]

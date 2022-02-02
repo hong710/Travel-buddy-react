@@ -1,0 +1,32 @@
+[
+    {
+        "name" :"New York City, US",
+        "link":"https://images.unsplash.com/photo-1527267207156-3372670819dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"
+    },
+
+    {
+        "name":"San Francisco, US",  
+        "link" : "https://images.unsplash.com/photo-1616912059100-05fe643ee63d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80"
+    },
+
+    {
+        "name": "Seattle, US",
+        "link": "https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+    },
+
+    {
+        "name":"Chicago, US",
+        "link":"https://images.unsplash.com/photo-1487788270274-b0a7d600569f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+    },
+
+    {   
+        "name":"London, UK",
+        "link":"https://images.unsplash.com/photo-1454793147212-9e7e57e89a4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80"
+    },
+
+    {   
+        "name":"Rome, Italy",
+        "link":"https://images.unsplash.com/photo-1537799943037-f5da89a65689?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
+    }
+
+]
