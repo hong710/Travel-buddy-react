@@ -1,12 +1,3 @@
-//you can change your code preset color here
-// $primary: #FAB549;
-// $secondary: #156064;
-// $success: #2ecc71;
-// $danger: #e74c3c;
-// $warning: #f1c40f;
-// $info: #0A58CA;
-// $light: #DEE2E6;
-// $dark:#2c3e50;
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
 
@@ -14,7 +5,8 @@ $custom-theme-colors:(
     "custom-yellow": #FAB549,
     "custom-blue" : #156064,
     "custom-dark": #181E4B,
-    "custom-light":#DEE2E6
+    "custom-light":#DEE2E6,
+    "custom-gray" :#5E6282
 );
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");

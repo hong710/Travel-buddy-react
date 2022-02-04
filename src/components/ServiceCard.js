@@ -12,8 +12,8 @@ function ServiceCard({name, description}) {
                     <FaHotel className="text-custom-yellow"/>
                 </div>
                 <div className="card-body">
-                    <h4 className="text-center">{name}</h4>
-                    <p>{description}</p>
+                    <h4 className="text-center custom-subheading">{name}</h4>
+                    <p className="px-4 text-center text-custom-gray">{description}</p>
                 </div>                
             </div>
         </div>
@@ -28,8 +28,8 @@ function ServiceCard({name, description}) {
                         
                     </div>
                     <div className="card-body">
-                    <h4 className="text-center">{name}</h4>
-                        <p>{description}</p>
+                    <h4 className="text-center custom-subheading">{name}</h4>
+                    <p className="px-4 text-center text-custom-gray">{description}</p>
                     </div>                
                 </div>
             </div>
@@ -42,8 +42,8 @@ function ServiceCard({name, description}) {
                         <FaUtensils className="text-success"/>
                     </div>
                     <div className="card-body">
-                    <h4 className="text-center">{name}</h4>
-                        <p>{description}</p>
+                    <h4 className="text-center custom-subheading">{name}</h4>
+                    <p className="px-4 text-center text-custom-gray">{description}</p>
                     </div>                
                 </div>
             </div>
@@ -56,8 +56,8 @@ function ServiceCard({name, description}) {
                         <FaLandmark className="text-danger"/>
                     </div>
                     <div className="card-body">
-                        <h4 className="text-center">{name}</h4>
-                        <p>{description}</p>
+                        <h4 className="text-center custom-subheading">{name}</h4>
+                        <p className="px-4 text-center text-custom-gray">{description}</p>
                     </div>                
                 </div>
             </div>
