@@ -15,9 +15,13 @@ function App() {
 
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState();
-  
+
   //top right left bottom of google map coord 
   const [bounds,setBounds] = useState({})
+
+  //loading this.state;
+  const [isLoading, setIsLoading] = useState(false)
+  
 
   //get user location when the page load
   useEffect(() =>{
@@ -29,11 +33,15 @@ function App() {
 
   // Set coordinates and bounds when user move map
   useEffect (()=> {
+    //loading Data progress
+    setIsLoading(true);
 
     //assign the boundaries to api properties api/index
     getPlacesData(bounds.sw, bounds.ne)
     .then ((res) => {
       setPlaces(res);
+      setIsLoading(false);
+
     })
   },[coordinates, bounds]);
 
@@ -47,7 +55,10 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="col-md-4"> 
-            <List places = {places}/>
+            <List 
+              places = {places}
+              isLoading = {isLoading}
+            />
           </div>
 
           <div className="col-md-8"> 
@@ -55,11 +66,10 @@ function App() {
               setCoordinates = {setCoordinates}
               setBounds = {setBounds}
               coordinates = {coordinates}
-
+              places = {places}
             />
           </div>
         </div>
-
       </div>
       
       {/* <Header />
