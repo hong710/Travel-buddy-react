@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import PlaceDetails from './PlaceDetails';
+import SelectedDetail from './SelectedDetail';
 
 const listStyles = {
-    width:  '100%',
-    height: '800px',
     };
 
-function List({places, isLoading}) {
+function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelected}) {
 
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
@@ -46,25 +45,28 @@ function List({places, isLoading}) {
                         <option value={4.5}>Above 4.5</option>
                     </select>
                 </div>
-                <div className=" overflow-auto" style={listStyles}>
+                
+                <div className=" overflow-auto list-hw" style={listStyles} >
                 {
-                    
+                    switchSelected
+                    ? (
+                            <SelectedDetail place = {selectedPlace} setSwitchSelected={setSwitchSelected}/>
+                    )
+                    :    
                     places?.filter(place =>place.name).map( (place,index) => {
-                        //console.log(place)
                         return(
-
-                            <PlaceDetails 
-                                key={index} 
-                                place = {place}
-                            />
-                        )}
+                            
+                                <PlaceDetails 
+                                    key={index} 
+                                    place = {place}
+                                />     
+                        )}     
                 )}
                 </div>
             </>
             )
             }
         </div>
-       
     
     )
 }

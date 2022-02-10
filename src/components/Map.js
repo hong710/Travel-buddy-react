@@ -2,16 +2,16 @@ import React,{useState} from 'react';
 import {IoLocationSharp, IoStar} from 'react-icons/io5';
 import GoogleMapReact from 'google-map-react';
 
-
-
 const mapStyles = {
     width:  '100%',
     height: '800px'
     };
 
-function Map({setCoordinates, setBounds, coordinates, places}) {
+function Map({setCoordinates, setBounds, coordinates, places, setSelectedPlace, setSwitchSelected}) {
 
     const filterPlaces = places?.filter(place =>place.name);
+
+
     return (
         <div className="" style={mapStyles}> 
             <GoogleMapReact
@@ -25,10 +25,12 @@ function Map({setCoordinates, setBounds, coordinates, places}) {
                     setCoordinates({lat: e.center.lat ,lng: e.center.lng});
                     setBounds ({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
                 }}
-                onChildClick = {((filterPlaces)=>{ })}
-
-
+                onChildClick = {(child)=> {
+                    setSelectedPlace (filterPlaces[child]);
+                    setSwitchSelected(true);
+                } }
             >
+
                 {filterPlaces?.map( (place,index) => (
                     <div 
                         lat={Number(place.latitude)}

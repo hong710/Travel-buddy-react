@@ -11,6 +11,7 @@ import Map from "./components/Map";
 import {getPlacesData} from './api';
 
 
+
 function App() {
 
   const [places, setPlaces] = useState([]);
@@ -19,16 +20,21 @@ function App() {
   //top right left bottom of google map coord 
   const [bounds,setBounds] = useState({})
 
+  //lift state from Map to List
+  const [selectedPlace, setSelectedPlace] = useState({}); 
+  const [switchSelected, setSwitchSelected] = useState(false)
+
   //loading this.state;
   const [isLoading, setIsLoading] = useState(false)
   
 
   //get user location when the page load
   useEffect(() =>{
+    setIsLoading(true);
     //build-in browser API to get user position
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
       setCoordinates ({lat: latitude, lng: longitude});
-        })
+      })
   },[]);
 
   // Set coordinates and bounds when user move map
@@ -58,6 +64,9 @@ function App() {
             <List 
               places = {places}
               isLoading = {isLoading}
+              selectedPlace = {selectedPlace}
+              switchSelected = {switchSelected}
+              setSwitchSelected = {setSwitchSelected}
             />
           </div>
 
@@ -67,6 +76,8 @@ function App() {
               setBounds = {setBounds}
               coordinates = {coordinates}
               places = {places}
+              setSelectedPlace = {setSelectedPlace}
+              setSwitchSelected = {setSwitchSelected}
             />
           </div>
         </div>
