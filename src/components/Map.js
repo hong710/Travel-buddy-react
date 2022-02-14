@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 
 const mapStyles = {
     width:  '100%',
-    height: '800px'
+    height: '890px'
     };
 
 function Map({setCoordinates, setBounds, coordinates, places, setSelectedPlace, setSwitchSelected}) {
@@ -15,12 +15,12 @@ function Map({setCoordinates, setBounds, coordinates, places, setSelectedPlace, 
     return (
         <div className="" style={mapStyles}> 
             <GoogleMapReact
-                bootstrapURLKeys={{key: 'AIzaSyDpx87EIP0wdi4B2qQKdJopBGyttVzyYLA' }}
+                bootstrapURLKeys={{key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
                 defaultCenter ={coordinates}
                 center = {coordinates}
                 defaultZoom = {14}
                 margin= {[50,50,50,50]}
-                options = {''}
+                options = {{disableDefaultUI: true, zoomControl: true }}
                 onChange= {(e) =>{
                     setCoordinates({lat: e.center.lat ,lng: e.center.lng});
                     setBounds ({ne: e.marginBounds.ne, sw: e.marginBounds.sw})

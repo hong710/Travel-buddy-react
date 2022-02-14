@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-import {Autocomplete} from "@react-google-maps/api";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Service from "./components/Services";
@@ -8,86 +7,92 @@ import Search from "./components/SearchBar";
 import List from "./components/List";
 import Map from "./components/Map";
 
-import {getPlacesData} from './api';
-
-
+import { getPlacesData } from "./api";
 
 function App() {
+    const [places, setPlaces] = useState([]);
+    const [coordinates, setCoordinates] = useState();
+	const [ratingPlaces, setRatingPlaces] = useState([]);
+    //top right left bottom of google map coord
+    const [bounds, setBounds] = useState({});
+    //lift state from Map to List
+    const [selectedPlace, setSelectedPlace] = useState({});
+    const [switchSelected, setSwitchSelected] = useState(false);
+	const [type, setType] = useState('restaurants');
+    const [rating, setRating] = useState('');
 
-  const [places, setPlaces] = useState([]);
-  const [coordinates, setCoordinates] = useState();
+    //loading state;
+    const [isLoading, setIsLoading] = useState(false);
 
-  //top right left bottom of google map coord 
-  const [bounds,setBounds] = useState({})
+    //get user location when the page load
+    useEffect(() => {
+        setIsLoading(true);
+        //build-in browser API to get user position
+        navigator.geolocation.getCurrentPosition(
+            ({ coords: { latitude, longitude } }) => {
+                setCoordinates({ lat: latitude, lng: longitude });
+            }
+        );
+    }, []);
 
-  //lift state from Map to List
-  const [selectedPlace, setSelectedPlace] = useState({}); 
-  const [switchSelected, setSwitchSelected] = useState(false)
+    // Set coordinates and bounds when user move map
+    useEffect(() => {
+		if(bounds.sw && bounds.ne){
+			//loading Data progress
+			setIsLoading(true);
+			//assign the boundaries to api properties api/index
+			getPlacesData(type, bounds.sw, bounds.ne)
+			.then((res) => {
+				setPlaces(res);
+				setRatingPlaces([]);
+				setIsLoading(false);
+			});
+		}
+    }, [type, bounds]);
 
-  //loading this.state;
-  const [isLoading, setIsLoading] = useState(false)
-  
+	//rating filter request
+	useEffect(() =>{
+		const ratingPlaces = places.filter ((place) => place.rating >= rating);
+		setRatingPlaces(ratingPlaces);
+	},[rating])
 
-  //get user location when the page load
-  useEffect(() =>{
-    setIsLoading(true);
-    //build-in browser API to get user position
-    navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
-      setCoordinates ({lat: latitude, lng: longitude});
-      })
-  },[]);
+    return (
+        <>
+			<Nav />
+			<Search setCoordinates={setCoordinates}/>
+			<div className="container">
+				<div className="row">
+					<div className="col-md-4">
+						<List
+							places={ratingPlaces.length ? ratingPlaces: places}
+							isLoading={isLoading}
+							selectedPlace={selectedPlace}
+							switchSelected={switchSelected}
+							setSwitchSelected={setSwitchSelected}
+							type = {type}
+							setType={setType}
+							rating ={rating}
+							setRating={setRating}
+						/>
+					</div>
+					<div className="col-md-8">
+						<Map
+							setCoordinates={setCoordinates}
+							setBounds={setBounds}
+							coordinates={coordinates}
+							places={ratingPlaces.length ? ratingPlaces: places}
+							setSelectedPlace={setSelectedPlace}
+							setSwitchSelected={setSwitchSelected}
+						/>
+					</div>
+				</div>
+			</div>
 
-  // Set coordinates and bounds when user move map
-  useEffect (()=> {
-    //loading Data progress
-    setIsLoading(true);
-
-    //assign the boundaries to api properties api/index
-    getPlacesData(bounds.sw, bounds.ne)
-    .then ((res) => {
-      setPlaces(res);
-      setIsLoading(false);
-
-    })
-  },[coordinates, bounds]);
-
-
-  return (
-    <>
-      <Nav />
-      {/* <Autocomplete > */}
-        <Search />
-      {/* </Autocomplete> */}
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4"> 
-            <List 
-              places = {places}
-              isLoading = {isLoading}
-              selectedPlace = {selectedPlace}
-              switchSelected = {switchSelected}
-              setSwitchSelected = {setSwitchSelected}
-            />
-          </div>
-
-          <div className="col-md-8"> 
-            <Map 
-              setCoordinates = {setCoordinates}
-              setBounds = {setBounds}
-              coordinates = {coordinates}
-              places = {places}
-              setSelectedPlace = {setSelectedPlace}
-              setSwitchSelected = {setSwitchSelected}
-            />
-          </div>
-        </div>
-      </div>
-      
-      {/* <Header />
-      <Service />
-      <DestinationsTop /> */}
-    </>
-  );
+            {/* <Header />
+			<Service />
+			<DestinationsTop /> */}
+        </>
+    );
 }
 
 export default App;
