@@ -19,18 +19,17 @@ function SearchBar({setCoordinates}) {
 
 
     return (
-    <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>    
-        <div className="container">    
-            <div className="row height d-flex justify-content-center my-5">
-                <div className="col-md-5">
-                    <div className="form d-flex align-items-center justify-content-center input-group"> 
-                        <input type="text" className="form-control form-input search-box " placeholder="Search anything..."/> 
-                        <button className="btn btn-custom-yellow search-btn"><FaSearch /></button>
+    <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}> 
+        <div id="search-box">
+            <div className="row d-flex ">
+                <div class="">
+                    <div class="form"> <FaSearch className="fa fa-search">
+                        </FaSearch> <input type="text" className="form-control form-input" placeholder="Search anything..."/>
                     </div>
                 </div>
             </div>
         </div>
-    </Autocomplete>    
+    </Autocomplete>  
 )}
 
 export default SearchBar;

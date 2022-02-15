@@ -45,6 +45,15 @@ body{
     font-weight: 600;
 }
 
+//Nav
+.nav-item a{
+    text-decoration: none;
+    .nav-link{
+        margin-top: 20px;
+        font-size:18px;
+    }
+}
+
 #header-img {
     background-image: 
     // linear-gradient(to bottom, rgba(54, 54, 54, 0.507), rgba(2, 2, 2, 0.705)),
@@ -102,3 +111,50 @@ body{
     background-color:white;
     padding:5px;
 }
+
+
+//Search box
+
+#search-box{
+    .form {
+    position: relative;
+
+        .fa-search {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #9ca3af
+        }
+
+        .form-input {
+            height: 45px;
+            text-indent: 33px;
+            border-radius: 5px;
+        }
+        
+        .form-input:focus {
+            box-shadow: none;
+            // border: none
+        }
+
+    }
+}
+
+.gradient-custom{
+
+    background:-moz-linear-gradient(90deg, #FCFC9F 0%, #F6E029 39%, #CA9800 100%); 
+
+    /* safari 5.1+,chrome 10+ */
+    background:-webkit-linear-gradient(90deg, #FCFC9F 0%, #F6E029 39%, #CA9800 100%);
+
+    /* ie 10+ */
+    background:-ms-linear-gradient(90deg, #FCFC9F 0%, #F6E029 39%, #CA9800 100%);
+
+    /* global 94%+ browsers support */
+    background:linear-gradient(90deg, #FCFC9F 0%, #F6E029 39%, #CA9800 100%);
+}
+
+
+
+
+

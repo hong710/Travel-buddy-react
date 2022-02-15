@@ -12598,6 +12598,15 @@ body {
   font-weight: 600;
 }
 
+.nav-item a {
+  text-decoration: none;
+}
+
+.nav-item a .nav-link {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
 #header-img {
   background-image: url(../assets/header.png);
   height: 100vh;
@@ -12654,5 +12663,35 @@ body {
   right: 10px;
   background-color: white;
   padding: 5px;
+}
+
+#search-box .form {
+  position: relative;
+}
+
+#search-box .form .fa-search {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: #9ca3af;
+}
+
+#search-box .form .form-input {
+  height: 45px;
+  text-indent: 33px;
+  border-radius: 5px;
+}
+
+#search-box .form .form-input:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.gradient-custom {
+  /* safari 5.1+,chrome 10+ */
+  /* ie 10+ */
+  /* global 94%+ browsers support */
+  background: -webkit-gradient(linear, left top, right top, from(#FCFC9F), color-stop(39%, #F6E029), to(#CA9800));
+  background: linear-gradient(90deg, #FCFC9F 0%, #F6E029 39%, #CA9800 100%);
 }
 /*# sourceMappingURL=main.css.map */

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Service from "./components/Services";
 import DestinationsTop from "./components/DestinationsTop";
-import Search from "./components/SearchBar";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import List from "./components/List";
 import Map from "./components/Map";
 
@@ -57,41 +59,52 @@ function App() {
 	},[rating])
 
     return (
-        <>
-			<Nav />
-			<Search setCoordinates={setCoordinates}/>
-			<div className="container">
-				<div className="row">
-					<div className="col-md-4">
-						<List
-							places={ratingPlaces.length ? ratingPlaces: places}
-							isLoading={isLoading}
-							selectedPlace={selectedPlace}
-							switchSelected={switchSelected}
-							setSwitchSelected={setSwitchSelected}
-							type = {type}
-							setType={setType}
-							rating ={rating}
-							setRating={setRating}
-						/>
-					</div>
-					<div className="col-md-8">
-						<Map
-							setCoordinates={setCoordinates}
-							setBounds={setBounds}
-							coordinates={coordinates}
-							places={ratingPlaces.length ? ratingPlaces: places}
-							setSelectedPlace={setSelectedPlace}
-							setSwitchSelected={setSwitchSelected}
-						/>
+        <BrowserRouter >
+			
+			<Route exact path="/map">
+				<Nav setCoordinates={setCoordinates}/>
+				<div className="container">
+					<div className="row">
+						<div className="col-md-4">
+							<List
+								places={ratingPlaces.length ? ratingPlaces: places}
+								isLoading={isLoading}
+								selectedPlace={selectedPlace}
+								switchSelected={switchSelected}
+								setSwitchSelected={setSwitchSelected}
+								type = {type}
+								setType={setType}
+								rating ={rating}
+								setRating={setRating}
+							/>
+						</div>
+						<div className="col-md-8">
+							<Map
+								setCoordinates={setCoordinates}
+								setBounds={setBounds}
+								coordinates={coordinates}
+								places={ratingPlaces.length ? ratingPlaces: places}
+								setSelectedPlace={setSelectedPlace}
+								setSwitchSelected={setSwitchSelected}
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
+			</Route>
+			<Route exact path="/">
+				<Nav setCoordinates={setCoordinates}/>
+				<Header />
+				<Service />
+				<DestinationsTop />
+			</Route>
+			<Route exact path="/login">
+				<Login />
+			</Route>
+			<Route exact path="/signup">
+				<Signup />
+			</Route>
 
-            {/* <Header />
-			<Service />
-			<DestinationsTop /> */}
-        </>
+	</BrowserRouter>
     );
 }
 
