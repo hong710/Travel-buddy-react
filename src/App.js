@@ -69,6 +69,7 @@ function App() {
 	.then((json) => {
 		if (json.username){
 			localStorage.setItem('username',json.username);
+			localStorage.setItem('id',json.id);
 		}
 		
 		

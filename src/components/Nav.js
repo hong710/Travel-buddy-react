@@ -9,6 +9,7 @@ function Nav({setCoordinates}) {
         e.preventDefault();
         localStorage.removeItem("username");
         localStorage.removeItem("jwt");
+        document.location.reload();
         
     }
 
@@ -24,46 +25,59 @@ function Nav({setCoordinates}) {
             </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                    <Link to="/map" >
-                    <p className="nav-link" aria-current="page">Restaurants</p>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/map">
-                    <p className="nav-link" aria-current="page">Hotels</p>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/map">
-                    <p className="nav-link" aria-current="page">Attractions</p>
-                    </Link>
-                </li>
+
+                {
+                    localStorage.getItem('username')
+                    ?
+                    <li className="nav-item">
+                        <Link to="/plan" >
+                            <p className="nav-link" aria-current="page">Your Plan</p>
+                        </Link>
+                    </li>
+                    :
+                    <>
+                    <li className="nav-item">
+                        <Link to="/map" >
+                        <p className="nav-link" aria-current="page">Restaurants</p>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/map">
+                        <p className="nav-link" aria-current="page">Hotels</p>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/map">
+                        <p className="nav-link" aria-current="page">Attractions</p>
+                        </Link>
+                    </li>
+                    </>
+                }
+                
             </ul>
 
 
 
             <form className="d-flex">
                 <SearchBar setCoordinates={setCoordinates}/>
-                {console.log(localStorage.getItem('username'))}
                 {                
                 localStorage.getItem('username') 
                 ? 
-                <div class="btn-group ms-3">
-                    <button type="button" class="btn btn-custom-yellow dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    {localStorage.getItem('username')}
+                <div className="btn-group ms-3">
+                    <button type="button" className="btn btn-custom-yellow dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Welcome, {localStorage.getItem('username')}
                     </button>
                     <ul className="dropdown-menu">
                         <li><span className="dropdown-item">Profile</span></li>
                         <li><span className="dropdown-item">Your plan</span></li>
-                        <li><hr class="dropdown-divider"/></li>
+                        <li><hr className="dropdown-divider"/></li>
                         <li> <span className="dropdown-item" onClick={logOutHandle}>Logout</span></li>
                     </ul>
                 </div>
                 :                 
                 <>
                 <Link to="/login">
-                    <button className="btn btn-link text-success ms-4">Log in</button>
+                    <button className="btn btn-outline-custom-blue ms-4 px-3">Login </button>
                 </Link>
 
                 <Link to="/signup">

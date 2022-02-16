@@ -7,9 +7,6 @@ const listStyles = {
 
 function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelected, type, setType, rating,setRating}) {
 
-    
-
-
     function onChangeType (e){
         setType(e.target.value);
     }
@@ -18,7 +15,7 @@ function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelect
         setRating(e.target.value);
     }
     return (
-        <div className="">
+        <div className="mt-5">
 
             <div className="d-flex justify-content-between mb-5">
                 <select value={type} onChange={onChangeType} className="form-select">
@@ -45,8 +42,6 @@ function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelect
             ): 
             (
             <>
-                
-                
                 <div className=" overflow-auto list-hw" style={listStyles} >
                 {
                     switchSelected

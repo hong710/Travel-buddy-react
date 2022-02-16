@@ -13,7 +13,7 @@ function Map({setCoordinates, setBounds, coordinates, places, setSelectedPlace, 
 
 
     return (
-        <div className="" style={mapStyles}> 
+        <div className="mt-5" style={mapStyles}> 
             <GoogleMapReact
                 bootstrapURLKeys={{key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
                 defaultCenter ={coordinates}
