@@ -1,50 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-const loginAPI = "http://localhost:3000/login"
+import {Link, useNavigate} from 'react-router-dom';
+const loginAPI = "http://localhost:3000/api/v1"
 
 function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    function handleEmailOnChange(event) {
-        setEmail(event.target.value);
+    const [loginUsername, setLoginUsername] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+    function loginUsernameOnChange(event) {
+        setLoginUsername(event.target.value);
     }
 
-    function handlePasswordOnChange(event) {
-        setPassword(event.target.value);
+    function loginPasswordOnChange(event) {
+        setLoginPassword(event.target.value);
     }
-
-    console.log(email)
-    console.log(password)
-
-    const userCreds = {
-        email: email,
-        password: password,
-    };
 
     const configObj = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(userCreds),
+        body: JSON.stringify({user: {username: loginUsername, password: loginPassword}}),
     };
+
     function handleLoginSubmit(e) {
         e.preventDefault();
 
-        fetch(loginAPI, configObj)
-            .then((resp) => {
-                if (resp.ok) {
-                    return window.location.href = "/"
-                }
-                return resp.json()
-            }).then((data) => console.log(data));
-
-        setPassword("")
-        setEmail("")
+        fetch(`${loginAPI}/login`, configObj)
+        .then((res) => res.json())
+        .then((json) => {
+            localStorage.setItem('jwt',json.jwt );
+            setMessage(json.message)
+            console.log(json)
+            
+            if (!json.message){
+                return navigate('/map/profile');
+            }
+            
+            
+        });
+        setLoginPassword("")
+        setLoginUsername("")
     }
-
-
 
     return (
         <section className="vh-100 gradient-custom">
@@ -53,31 +50,33 @@ function Login() {
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div className="card" >
                             <div className="card-body p-5 text-center">
-
+                                <form onSubmit={handleLoginSubmit}>
                                 <div className="mb-md-5 mt-md-4 ">
 
                                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                                     <p className=" mb-5">Please enter your login and password!</p>
+                                    <p className="text-danger mmb-5">{message&& message}</p>
 
                                     <div className="form-outline mb-4">
-                                        <input type="email" id="typeEmailX" className="form-control form-control-lg" value={email} onChange={handleEmailOnChange} />
-                                        <label className="form-label" htmlFor="typeEmailX">Email</label>
+                                        <input type="text" id="typeEmailX" className="form-control form-control-lg" value={loginUsername} onChange={loginUsernameOnChange} />
+                                        <label className="form-label" htmlFor="typeEmailX">Username</label>
                                     </div>
 
                                     <div className="form-outline mb-4">
-                                        <input type="password" id="typePasswordX" className="form-control form-control-lg" value={password} onChange={handlePasswordOnChange} />
+                                        <input type="password" id="typePasswordX" className="form-control form-control-lg" value={loginPassword} onChange={loginPasswordOnChange} />
                                         <label className="form-label" htmlFor="typePasswordX">Password</label>
                                     </div>
 
                                     <p className="small mb-5 pb-lg-2"><a className="" href="#!">Forgot password?</a></p>
 
-                                    <button className="btn btn-outline-custom-yellow btn-lg px-5" type="submit" onClick={handleLoginSubmit}>Login</button>
+                                    <button className="btn btn-outline-custom-yellow btn-lg px-5" type="submit" >Login</button>
                                 </div>
+                                </form>
 
                                 <div>
-                                    <p className="mb-0">Don't have an account?</p> <NavLink to="/signup">
+                                    <p className="mb-0">Don't have an account?</p> <Link to="/signup">
                                         <p className="fw-bold">Sign Up</p>
-                                    </NavLink>
+                                    </Link>
                                 </div>
 
                             </div>

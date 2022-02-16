@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-const usersAPI = "http://localhost:3000/users";
+import { Link } from "react-router-dom";
+const usersAPI = "http://localhost:3000/api/v1";
 
 
 function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
+    const [username, setUsername] = useState("")
+    // const [lastName, setLastName] = useState("")
 
     function handleEmailOnChange(event) {
         setEmail(event.target.value);
@@ -17,47 +17,35 @@ function Signup() {
         setPassword(event.target.value);
     }
 
-    function handleFirstNameOnChange(event) {
-        setFirstName(event.target.value)
+    function handleUserNameOnChange(event) {
+        setUsername(event.target.value)
     }
 
-    function handleLastNameOnChange(event) {
-        setLastName(event.target.value)
-    }
-
-    const userCreds = {
-        f_name: firstName,
-        l_name: lastName,
-        email: email,
-        password: password,
-    };
+    // function handleLastNameOnChange(event) {
+    //     setLastName(event.target.value)
+    // }
 
     const configObj = {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Content-type": "application/json",
         },
-        body: JSON.stringify(userCreds),
+        body: JSON.stringify({user: {username, email, password}}),
     };
     function handleSignUpSubmit(e) {
         e.preventDefault();
 
-        fetch(usersAPI, configObj)
-            .then((resp) => {
-                if (resp.ok) {
-                    return window.location.href = "/"
-                }
-                return resp.json()
-            }).then((data) => console.log(data));
+        fetch(`${usersAPI}/users`, configObj)
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+            
 
-        setFirstName("")
-        setLastName("")
+        setUsername("")
+        // setLastName("")
         setEmail("")
         setPassword("")
     }
-
-    console.log("first name", firstName)
-    console.log("last name", lastName)
 
     return (
         <section className="vh-100 gradient-custom">
@@ -70,20 +58,21 @@ function Signup() {
                                     <h2 className="fw-bold mb-2 text-uppercase">Sign Up</h2>
                                     <p className=" mb-5">Welcome! Your adventure starts here.</p>
 
+                                    <form onSubmit={handleSignUpSubmit}>
                                     <div className="form-outline mb-4">
                                         <input
                                             type="first_name"
                                             id="first_name"
                                             className="form-control form-control-lg"
-                                            onChange={handleFirstNameOnChange}
-                                            value={firstName}
+                                            onChange={handleUserNameOnChange}
+                                            value={username}
                                         />
                                         <label className="form-label" htmlFor="email">
-                                            First name
+                                            User Name
                                         </label>
                                     </div>
 
-                                    <div className="form-outline mb-4">
+                                    {/* <div className="form-outline mb-4">
                                         <input
                                             type="last_name"
                                             id="last_name"
@@ -94,7 +83,7 @@ function Signup() {
                                         <label className="form-label" htmlFor="email">
                                             Last name
                                         </label>
-                                    </div>
+                                    </div> */}
                                     <div className="form-outline mb-4">
                                         <input
                                             type="email"
@@ -121,26 +110,25 @@ function Signup() {
                                         </label>
                                     </div>
 
-                                    <div className="form-outline mb-4">
+                                    {/* <div className="form-outline mb-4">
                                         <input type="password" id="confirm_password" className="form-control form-control-lg" />
                                         <label className="form-label" htmlFor="confirm_password">Confirm Password</label>
-                                    </div>
+                                    </div> */}
 
                                     <button
                                         className="btn btn-outline-custom-yellow btn-lg px-5"
                                         type="submit"
-                                        onClick={handleSignUpSubmit}
                                     >
                                         Sign Up
-                                    </button>
+                                    </button> 
+                                </form>
                                 </div>
-
                                 <div>
                                     <p className="mb-0">
                                         Already have an account?{" "} </p>
-                                    <NavLink to="/login">
+                                    <Link to="/login">
                                         <p className="fw-bold">Sign In</p>
-                                    </NavLink>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Service from "./components/Services";
@@ -22,6 +22,7 @@ function App() {
     const [switchSelected, setSwitchSelected] = useState(false);
 	const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
+
 
     //loading state;
     const [isLoading, setIsLoading] = useState(false);
@@ -59,9 +60,10 @@ function App() {
 	},[rating])
 
     return (
-        <BrowserRouter >
-			
-			<Route exact path="/map">
+		<Router>
+        <Routes >			
+			<Route path="map" element={
+				<>
 				<Nav setCoordinates={setCoordinates}/>
 				<div className="container">
 					<div className="row">
@@ -90,21 +92,23 @@ function App() {
 						</div>
 					</div>
 				</div>
-			</Route>
-			<Route exact path="/">
+			</>
+			}/>		
+		
+			<Route path="/" element={
+				<>
 				<Nav setCoordinates={setCoordinates}/>
 				<Header />
 				<Service />
 				<DestinationsTop />
-			</Route>
-			<Route exact path="/login">
-				<Login />
-			</Route>
-			<Route exact path="/signup">
-				<Signup />
-			</Route>
+				</>
+			}/>
 
-	</BrowserRouter>
+			<Route path="login" element={<Login />}/>
+
+			<Route path="signup" element={<Signup />}/>
+		</Routes>
+		</Router>
     );
 }
 
