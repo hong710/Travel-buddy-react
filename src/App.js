@@ -23,6 +23,8 @@ function App() {
 	const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
 
+	
+
 
     //loading state;
     const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +54,25 @@ function App() {
 			});
 		}
     }, [type, bounds]);
+
+
+	const loginAPI = "http://localhost:3000/api/v1";
+	fetch(`${loginAPI}/profile`, {
+		method: "GET",
+		headers: {
+			Accepts: 'application/json',
+			"Content-Type": "application/json",
+			'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+		}
+	})
+	.then((res) => res.json())
+	.then((json) => {
+		if (json.username){
+			localStorage.setItem('username',json.username);
+		}
+		
+		
+	});
 
 	//rating filter request
 	useEffect(() =>{

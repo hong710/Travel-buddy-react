@@ -7,7 +7,7 @@ const mapStyles = {
     height: '890px'
     };
 
-function Map({setCoordinates, setBounds, coordinates, places, setSelectedPlace, setSwitchSelected}) {
+function Map({setCoordinates, setBounds, coordinates, places, setSelectedPlace, setSwitchSelected, loggedInUsername}) {
 
     const filterPlaces = places?.filter(place =>place.name);
 

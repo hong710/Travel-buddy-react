@@ -4,6 +4,14 @@ import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 
 function Nav({setCoordinates}) {
+
+    function logOutHandle(e){
+        e.preventDefault();
+        localStorage.removeItem("username");
+        localStorage.removeItem("jwt");
+        
+    }
+
     return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
@@ -32,8 +40,28 @@ function Nav({setCoordinates}) {
                     </Link>
                 </li>
             </ul>
+
+
+
             <form className="d-flex">
                 <SearchBar setCoordinates={setCoordinates}/>
+                {console.log(localStorage.getItem('username'))}
+                {                
+                localStorage.getItem('username') 
+                ? 
+                <div class="btn-group ms-3">
+                    <button type="button" class="btn btn-custom-yellow dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    {localStorage.getItem('username')}
+                    </button>
+                    <ul className="dropdown-menu">
+                        <li><span className="dropdown-item">Profile</span></li>
+                        <li><span className="dropdown-item">Your plan</span></li>
+                        <li><hr class="dropdown-divider"/></li>
+                        <li> <span className="dropdown-item" onClick={logOutHandle}>Logout</span></li>
+                    </ul>
+                </div>
+                :                 
+                <>
                 <Link to="/login">
                     <button className="btn btn-link text-success ms-4">Log in</button>
                 </Link>
@@ -41,6 +69,9 @@ function Nav({setCoordinates}) {
                 <Link to="/signup">
                 <button className="btn btn-outline-custom-yellow ms-4">Sign Up</button>
                 </Link>
+                </>                
+                }
+                
             </form>
         </div>
         </div>

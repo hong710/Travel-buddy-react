@@ -18,10 +18,12 @@ function Login() {
     const configObj = {
         method: "POST",
         headers: {
+            Accepts: 'application/json',
             "Content-Type": "application/json",
         },
         body: JSON.stringify({user: {username: loginUsername, password: loginPassword}}),
     };
+
 
     function handleLoginSubmit(e) {
         e.preventDefault();
@@ -31,16 +33,16 @@ function Login() {
         .then((json) => {
             localStorage.setItem('jwt',json.jwt );
             setMessage(json.message)
-            console.log(json)
+            //console.log(json)
             
             if (!json.message){
-                return navigate('/map/profile');
-            }
-            
-            
+                return navigate('/map');
+            }           
         });
-        setLoginPassword("")
-        setLoginUsername("")
+
+        setLoginUsername("");
+        setLoginPassword("");
+
     }
 
     return (
