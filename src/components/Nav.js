@@ -29,18 +29,22 @@ function Nav({setCoordinates}) {
                 {
                     localStorage.getItem('username')
                     ?
-                    <li className="nav-item">
-                        <Link to="/plan" >
-                            <p className="nav-link" aria-current="page">Your Plan</p>
-                        </Link>
-                    </li>
-                    :
                     <>
                     <li className="nav-item">
                         <Link to="/map" >
-                        <p className="nav-link" aria-current="page">Restaurants</p>
+                        <p className="nav-link" aria-current="page">Map</p>
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link to="/plan" >
+                            <p className="nav-link" aria-current="page">Bookmark</p>
+                        </Link>                        
+                    </li>
+                    
+                    </>
+                    :
+                    <>
+                    
                     <li className="nav-item">
                         <Link to="/map">
                         <p className="nav-link" aria-current="page">Hotels</p>

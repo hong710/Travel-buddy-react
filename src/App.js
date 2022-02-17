@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import List from "./components/List";
 import Map from "./components/Map";
+import Bookmark from "./components/Bookmark";
 
 import { getPlacesData } from "./api";
 
@@ -123,6 +124,13 @@ function App() {
 				<Header />
 				<Service />
 				<DestinationsTop />
+				</>
+			}/>
+
+			<Route path="/plan" element={
+				<>
+				<Nav setCoordinates={setCoordinates}/>
+				<Bookmark />
 				</>
 			}/>
 

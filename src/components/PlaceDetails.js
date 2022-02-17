@@ -1,3 +1,4 @@
+import React, {useState,useEffect} from 'react';
 import {FaStar} from 'react-icons/fa';
 
 const urlAPI = "http://localhost:3000";
@@ -5,17 +6,20 @@ const urlAPI = "http://localhost:3000";
 function PlaceDetails({place}) {
     const location_img =place.photo ? place.photo.images.large.url :'https://images.unsplash.com/photo-1618597017017-7ce39f28eb41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80 '
 
+    const [typeId, setTypeId] = useState();
+
     const data = {
         name: place.name,
-        address: place.address,
+        address: place.address || place.ranking_geo,
         img: location_img,
+        category: place.ranking_category,
         phone: place.phone,
         review: place.rating
     }
 
     function addPlanHandle(e){
         e.preventDefault();
-        fetch(`${urlAPI}/restaurants`,{
+        fetch(`${urlAPI}/activities`,{
             method: 'POST',
             headers: {
                 Accepts: 'application/json',
@@ -25,10 +29,33 @@ function PlaceDetails({place}) {
             body:JSON.stringify(data)
         })
         .then (res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            setTypeId(data.id);
+            console.log(data);
+        }
+            
+            )
 
     }
-    
+    console.log({typeId})
+
+
+    // assign  restaurant to user_id
+    useEffect(()=>{
+        fetch(`${urlAPI}/user_activities`,{
+            method: 'POST',
+            headers: {
+                Accepts: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+            body:JSON.stringify({activity_id:typeId, user_id:localStorage.getItem('id')})
+        })
+        .then (res => res.json())
+        .then(data => console.log(data.id))
+
+    },[typeId])
+
     return (
         <div className="mt-4">
             <div className="card shadow">
@@ -40,8 +67,8 @@ function PlaceDetails({place}) {
                 />
                 <div className="card-body">
                     <h5 className="custom-subheading">{place.name ? place.name: ""}</h5>
-                    <h6>{place.address}</h6>
-                    <h6>Phone number: {place.phone}</h6>
+                    <h6>{place.address || place.ranking_geo }</h6>
+                    <h6>{place.phone}</h6>
                     <h6>Ranking: {place.ranking}</h6>
                     <h6>Price range: {place.price_level}</h6>
                     <h6>Rating: {place.rating} <FaStar className="text-warning"/> out of  {place.num_reviews} reviews</h6>
@@ -60,7 +87,7 @@ function PlaceDetails({place}) {
                             localStorage.getItem('username')
                             ?
                             <div >
-                            <button className="btn btn-outline-custom-blue" onClick={addPlanHandle}>Add to your Plan</button>
+                            <button className="btn btn-outline-custom-blue" onClick={addPlanHandle}>Add to bookmark</button>
                             </div>
                             : 
                             <></>

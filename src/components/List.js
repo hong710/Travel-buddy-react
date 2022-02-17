@@ -49,7 +49,7 @@ function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelect
                             <SelectedDetail place = {selectedPlace} setSwitchSelected={setSwitchSelected}/>
                     )
                     :    
-                    places?.filter(place =>place.name).map( (place,index) => {
+                    places?.filter(place =>place.name && place.ranking_category).map( (place,index) => {
                         console.log(place)
                         return(
                             

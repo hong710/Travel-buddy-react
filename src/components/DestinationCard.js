@@ -14,10 +14,8 @@ function DestinationCard({name, link}) {
                 <div className="card-body">
                     <h4>{name}</h4>
                     <h6>Price range: $$$</h6>
-
                 </div>                
             </div>
-    
         </div>
     
     );
