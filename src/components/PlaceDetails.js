@@ -81,7 +81,7 @@ function PlaceDetails({place}) {
         <div className="mt-4">
             <div className="card shadow position-relative">
                 {
-                checkBookmark
+                localStorage.getItem('username') && checkBookmark 
                 ?
                 <div type="button" className="bookmark-star text-center">
                     <FaStar className="text-warning" />

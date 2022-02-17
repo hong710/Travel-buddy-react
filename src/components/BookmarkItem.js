@@ -3,14 +3,14 @@ import {FaStar} from 'react-icons/fa';
 import {IoCloseSharp} from "react-icons/io5";
 
 
-function BookmarkItem({activities}) {
+function BookmarkItem({activity}) {
 
     const[closed, setClosed] = useState({display: "block"});
-
+    console.log(activity);
     function deleteItemClick(e){
         e.preventDefault();
         setClosed({display: "none"});
-        fetch(`http://localhost:3000/activities/${activities.id}`, {
+        fetch(`http://localhost:3000/activity/${activity.id}`, {
         method: "DELETE",
         headers: {
 			'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -29,16 +29,16 @@ function BookmarkItem({activities}) {
                 <img
                     className=" card-img-top object-fit-cover"
                     height="250px"
-                    src={activities.img}
+                    src={activity.img}
                     alt="Card"
                 />
             </div>
-            {console.log(activities)}
+            {console.log(activity)}
             <div className="card-body">
-                <h5 className="custom-subheading">{activities.name}</h5>
-                <h6>{activities.address}</h6>
-                <h6>Phone number: {activities.phone}</h6>
-                <h6>Rating: {activities.review} <FaStar className="text-warning"/> </h6>                   
+                <h5 className="custom-subheading">{activity.name}</h5>
+                <h6>{activity.address}</h6>
+                <h6>Phone number: {activity.phone}</h6>
+                <h6>Rating: {activity.review} <FaStar className="text-warning"/> </h6>                   
             </div>                
         </div>
     </div>

@@ -60,37 +60,42 @@ function Bookmark() {
                 </div>
 
                 
-            </div>            
+            </div>  
+            {console.log({acType})
+            } 
+            {console.log({location})
+            }          
     
             <div className="row mt-5">
                 {
-                    acType==="All" && location ==="All"
+                    acType==="All"
                     ?
-                    activities?.map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    activities?.map((activity,index) => <BookmarkItem key= {index} activity = {activity}/>)
                     :
-                    activities?.filter(place => place.city===location).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    <></>
                 }
                 {
-                    acType==="restaurant" && location !=="All"
+                    acType==="restaurant"
                     ?
-                    activities?.filter(place => place.category===acType && place.city===location).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    activities?.filter(place => place.category==="restaurant").map((activity,index) => <BookmarkItem key= {index} activity = {activity}/>)
                     :
-                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
-                }
+                    <></>
+                } 
                 {
-                    acType==="hotel" && location !=="All"
+                    acType==="hotel"
                     ?
-                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    activities?.filter(place => place.category==="hotel" ).map((activity,index) => <BookmarkItem key= {index} activity = {activity}/>)
                     :
-                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
-                }
-                {
-                    acType==="attraction" && location !=="All"
+                    <></>
+                }   
+
+                 {
+                    acType==="attraction"
                     ?
-                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    activities?.filter(place => place.category==="attraction").map((activity,index) => <BookmarkItem key= {index} activity = {activity}/>)
                     :
-                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
-                }                   
+                    <></>
+                }          
         
                 
             </div>
