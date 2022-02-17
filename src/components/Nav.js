@@ -57,11 +57,7 @@ function Nav({setCoordinates}) {
                     </li>
                     </>
                 }
-                
             </ul>
-
-
-
             <form className="d-flex">
                 <SearchBar setCoordinates={setCoordinates}/>
                 {                

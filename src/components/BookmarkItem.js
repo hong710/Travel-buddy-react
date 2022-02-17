@@ -16,18 +16,16 @@ function BookmarkItem({activities}) {
 			'Authorization': `Bearer ${localStorage.getItem('jwt')}`
 		}
         })
-
-
     }
     return (
     <div className="col-4 mt-4 mt-4" style={closed}>
         <div className="card shadow bookmark-item">
             <div className="position-relative ">
                 <div type="button" className="delete-btn text-center"  aria-label="Close" 
-            onClick={deleteItemClick}             
-            >
-                <IoCloseSharp className="text-danger" />
-            </div>
+                onClick={deleteItemClick}             
+                >
+                    <IoCloseSharp className="text-danger" />
+                </div>
                 <img
                     className=" card-img-top object-fit-cover"
                     height="250px"

@@ -12710,4 +12710,15 @@ body {
 .bookmark-item:hover .delete-btn {
   display: block;
 }
+
+.bookmark-star {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(42, 42, 42, 0.5);
+  font-size: 2em;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
 /*# sourceMappingURL=main.css.map */
