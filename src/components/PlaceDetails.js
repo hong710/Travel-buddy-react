@@ -10,11 +10,13 @@ function PlaceDetails({place}) {
 
     const data = {
         name: place.name,
-        address: place.address || place.ranking_geo,
+        address: place.address || place.location_string,
         img: location_img,
         category: place.ranking_category,
         phone: place.phone,
-        review: place.rating
+        review: place.rating,
+        city: place.ranking_geo
+        
     }
 
     function addPlanHandle(e){
@@ -30,29 +32,29 @@ function PlaceDetails({place}) {
         })
         .then (res => res.json())
         .then(data => {
-            setTypeId(data.id);
-            console.log(data);
-        }
-            
-            )
-
+            setTypeId(data.id); 
+        })
     }
-    console.log({typeId})
+    // console.log({typeId})
 
 
     // assign  restaurant to user_id
+    
     useEffect(()=>{
-        fetch(`${urlAPI}/user_activities`,{
-            method: 'POST',
-            headers: {
-                Accepts: 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
-            body:JSON.stringify({activity_id:typeId, user_id:localStorage.getItem('id')})
-        })
-        .then (res => res.json())
-        .then(data => console.log(data.id))
+        if(typeId!==undefined){
+            fetch(`${urlAPI}/user_activities`,{
+                method: 'POST',
+                headers: {
+                    Accepts: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                },
+                body:JSON.stringify({activity_id:typeId, user_id:localStorage.getItem('id')})
+            })
+            .then (res => res.json())
+            .then(data => console.log(data.id))
+            .catch(err =>console.log(err))
+        }        
 
     },[typeId])
 

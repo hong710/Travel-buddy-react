@@ -134,9 +134,7 @@ body{
         
         .form-input:focus {
             box-shadow: none;
-            // border: none
         }
-
     }
 }
 
@@ -154,7 +152,27 @@ body{
     background:linear-gradient(90deg, #FCFC9F 0%, #F6E029 39%, #CA9800 100%);
 }
 
+//bookmark Item
+.bookmark-item{
+    .delete-btn {
+        position: absolute;
+        top:10px;
+        right:10px;
+        background-color:rgba(42, 42, 42, 0.5);
+        //padding:15px;
+        display:none;
+        font-size:2em;
+        border-radius:50%;
+        height:50px;
+        width:50px;
+    } 
 
+&:hover{
+    .delete-btn{
+        display:block;
+    }
+}
+}
 
 
 
