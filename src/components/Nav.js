@@ -68,8 +68,7 @@ function Nav({setCoordinates}) {
                     Welcome, {localStorage.getItem('username')}
                     </button>
                     <ul className="dropdown-menu">
-                        <li><span className="dropdown-item">Profile</span></li>
-                        <li><span className="dropdown-item">Your plan</span></li>
+                        <li><span className="dropdown-item">Bookmarks</span></li>
                         <li><hr className="dropdown-divider"/></li>
                         <li> <span className="dropdown-item" onClick={logOutHandle}>Logout</span></li>
                     </ul>

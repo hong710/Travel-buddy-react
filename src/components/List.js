@@ -19,7 +19,7 @@ function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelect
 
             <div className="d-flex justify-content-between mb-5">
                 <select value={type} onChange={onChangeType} className="form-select">
-                    <option value="restaurants">Restaurant</option>
+                    <option value="restaurants">Restaurants</option>
                     <option value="hotels">Hotels</option>
                     <option value="attractions">Attractions</option>
                 </select>
@@ -50,7 +50,7 @@ function List({places, isLoading, selectedPlace, switchSelected, setSwitchSelect
                     )
                     :    
                     places?.filter(place =>place.name && place.ranking_category).map( (place,index) => {
-                        console.log(place)
+                        //console.log(place)
                         return(
                             
                                 <PlaceDetails 

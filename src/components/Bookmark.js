@@ -6,10 +6,15 @@ const urlApi = "http://localhost:3000/api/v1"
 function Bookmark() {
 
     const [activities, setActivities] = useState([]); 
-    const [acType, setActype] = useState("All");
+    const [acType, setAcType] = useState("All");
+    const [location, setLocation] = useState("All");
 
-    function onChangeAcType(){
-        setActype(acType);
+    function onChangeAcType(e){
+        setAcType(e.target.value);
+    }
+
+    function onChangeLocation(e){
+        setLocation(e.target.value);
     }
 
 
@@ -26,6 +31,9 @@ function Bookmark() {
         .then((data) => setActivities(data))
     },[])
 
+    const cities = activities?.map((activity) => activity.city)
+    const uniqueCities = [...new Set(cities)]
+    uniqueCities.unshift('All')
 
     return (
         <div className="pt-5">
@@ -36,30 +44,55 @@ function Bookmark() {
                 <div className="col-3 er">
                     <h6>Activities</h6>
                     <select value={acType} onChange={onChangeAcType} className="form-select">
-                        <option value="restaurants">All</option>
-                        <option value="restaurants">Restaurant</option>
-                        <option value="hotels">Hotels</option>
-                        <option value="attractions">Attractions</option>
+                        <option value="All">All</option>
+                        <option value="restaurant">Restaurants</option>
+                        <option value="hotel">Hotels</option>
+                        <option value="attraction">Attractions</option>
                     </select>
                 </div>
 
                 <div className="col-3">
                     <h6>Location</h6>
-                    <select value={acType} onChange={onChangeAcType} className="form-select">
-                        <option value="restaurants">All</option>
-                        <option value="restaurants">Restaurant</option>
-                        <option value="hotels">Hotels</option>
-                        <option value="attractions">Attractions</option>
+                    <select value={location} onChange={onChangeLocation} className="form-select">
+                        {
+                        uniqueCities?.map((city,i)=><option key ={i} value={city}>{city}</option>)}
                     </select>
                 </div>
 
                 
-            </div>
-           
-            
-
+            </div>            
+    
             <div className="row mt-5">
-                {activities?.map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)}
+                {
+                    acType==="All" && location ==="All"
+                    ?
+                    activities?.map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    :
+                    activities?.filter(place => place.city===location).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                }
+                {
+                    acType==="restaurant" && location !=="All"
+                    ?
+                    activities?.filter(place => place.category===acType && place.city===location).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    :
+                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                }
+                {
+                    acType==="hotel" && location !=="All"
+                    ?
+                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    :
+                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                }
+                {
+                    acType==="attraction" && location !=="All"
+                    ?
+                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                    :
+                    activities?.filter(place => place.category===acType).map((activities,index) => <BookmarkItem key= {index} activities = {activities}/>)
+                }                   
+        
+                
             </div>
         </div>
     </div>

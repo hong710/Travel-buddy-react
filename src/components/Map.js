@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import {IoLocationSharp, IoStar} from 'react-icons/io5';
+import React from 'react';
+import {IoStar} from 'react-icons/io5';
 import GoogleMapReact from 'google-map-react';
 
 const mapStyles = {

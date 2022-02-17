@@ -33,6 +33,7 @@ function BookmarkItem({activities}) {
                     alt="Card"
                 />
             </div>
+            {console.log(activities)}
             <div className="card-body">
                 <h5 className="custom-subheading">{activities.name}</h5>
                 <h6>{activities.address}</h6>
